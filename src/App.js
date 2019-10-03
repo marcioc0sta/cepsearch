@@ -4,7 +4,6 @@ import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 
 import cep from './api/cep';
 import geocode from './api/geocode';
-import API_KEYS from './api/config';
 
 const style = {
   width: '50%',
@@ -32,5 +31,5 @@ function App(props) {
 }
 
 export default GoogleApiWrapper({
-  apiKey: API_KEYS.GOOGLE_API
+  apiKey: process.env.REACT_APP_GOOGLE_API_KEY
 })(App);
