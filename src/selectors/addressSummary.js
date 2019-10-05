@@ -5,7 +5,8 @@ const getAddress = state => {
     streetName: state.logradouro,
     neighborhood: state.bairro,
     city: state.localidade,
-    cityInitials: state.uf
+    cityInitials: state.uf,
+    cep: state.cep
   };
   return address;
 };
