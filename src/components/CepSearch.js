@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import { connect } from 'react-redux';
 
 import { handleGetAddresFromCep } from '../actions/address';
-import addressSummarySelector from '../selectors/addressSummary';
 
 const style = {
   width: '50%',
@@ -16,25 +16,39 @@ class CepSearch extends Component {
   }
 
   render() {
+    // const { lat, long: lng } = this.props.coords;
+
     return (
-      <Map
-        style={style}
-        google={this.props.google}
-        zoom={17}
-        initialCenter={{ lat: -3.7779367, lng: -38.569881 }}
-      >
-        <Marker name={'Current location'} />
-      </Map>
+      <div>
+        {!this.props.coordsQueryIsLoading && (
+          <div>maps</div>
+          // <Map
+          //   style={style}
+          //   google={this.props.google}
+          //   zoom={17}
+          //   center={{ lat, lng }}
+          // >
+          //   <Marker position={{ lat, lng }} />
+          // </Map>
+        )}
+      </div>
     );
   }
 }
 
-const mapStateToProps = ({ address }) => {
-  return { address };
+const mapStateToProps = ({ address, coords, coordsQueryIsLoading }) => {
+  return { address, coords, coordsQueryIsLoading };
 };
 
 const mapDispatchToProps = {
   getAddressFromCep: handleGetAddresFromCep
+};
+
+CepSearch.propTypes = {
+  getAddressFromCep: PropTypes.func,
+  google: PropTypes.object,
+  coords: PropTypes.object,
+  coordsQueryIsLoading: PropTypes.bool
 };
 
 export default connect(
