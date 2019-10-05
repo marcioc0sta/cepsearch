@@ -12,8 +12,8 @@ const style = {
 
 function App(props) {
   Promise.all([
-    cep(60533592),
-    geocode('Rua+Miguel+Mentem+Vila+Guilherme,+sao+paulo')
+    cep(60720015),
+    geocode('av+general+osorio+de+paiva,857,+fortaleza+ce')
   ]).then(values => values.map(value => console.log(value.data)));
 
   return (
@@ -22,7 +22,7 @@ function App(props) {
         style={style}
         google={props.google}
         zoom={17}
-        initialCenter={{ lat: -23.515663, lng: -46.6132669 }}
+        initialCenter={{ lat: -3.7779367, lng: -38.569881 }}
       >
         <Marker name={'Current location'} />
       </Map>

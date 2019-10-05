@@ -7,7 +7,12 @@
     "google-maps-react": "^2.0.2",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
-    "react-scripts": "3.2.0"
+    "react-scripts": "3.2.0",
+    "redux": "^4.0.1",
+    "react-redux": "^6.0.0",
+    "redux-thunk": "^2.3.0",
+    "lodash": "^4.17.11",
+    "styled-components": "^4.0.2"
   },
   "devDependencies": {
     "eslint": "^6.3.0",
