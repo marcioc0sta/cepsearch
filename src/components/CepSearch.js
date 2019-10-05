@@ -16,7 +16,7 @@ class CepSearch extends Component {
   }
 
   render() {
-    // const { lat, long: lng } = this.props.coords;
+    // const { lat, lng } = this.props.coords;
 
     return (
       <div>
