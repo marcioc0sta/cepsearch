@@ -39,7 +39,7 @@ export default function cepsearch(state = initialState, action) {
       return {
         ...state,
         ...action.coords,
-        zoom: 19
+        zoom: 17
       };
     case IS_COORD_QUERY_LOADING:
       return {
