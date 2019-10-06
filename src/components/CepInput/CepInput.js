@@ -11,6 +11,10 @@ const CepInput = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    const { cep: storeCep } = props.address;
+    if (cep === storeCep) return;
+
     const cepToApi = cep.replace('-', '');
     getAddressFromCep(cepToApi);
   };
@@ -27,15 +31,20 @@ const CepInput = props => {
   );
 };
 
+const mapStateToProps = ({ address }) => {
+  return { address };
+};
+
 const mapDispatchToProps = {
   getAddressFromCep: handleGetAddresFromCep
 };
 
 CepInput.propTypes = {
+  address: PropTypes.object,
   getAddressFromCep: PropTypes.func
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(CepInput);
