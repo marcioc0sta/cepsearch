@@ -3,11 +3,22 @@ import {
   IS_ADDRESS_FROM_CEP_QUERY_LOADING,
   GET_COORDS,
   IS_COORD_QUERY_LOADING,
+  RESET_SEARCH
 } from '../actions/address';
 
 const initialState = {
-  address: {},
-  coords: {},
+  address: {
+    streetName: 'Esplanada dos Ministérios',
+    neighborhood: 'Zona Cívico-Administrativa',
+    city: 'Brasília',
+    cityInitials: 'DF',
+    cep: '70050-000'
+  },
+  coords: {
+    lat: -15.7801,
+    lng: -47.9292
+  },
+  zoom: 4,
   addressFromCepIsLoading: true,
   coordsQueryIsLoading: true
 };
@@ -27,12 +38,18 @@ export default function cepsearch(state = initialState, action) {
     case GET_COORDS:
       return {
         ...state,
-        ...action.coords
+        ...action.coords,
+        zoom: 19
       };
     case IS_COORD_QUERY_LOADING:
       return {
         ...state,
         coordsQueryIsLoading: action.isLoading
+      };
+    case RESET_SEARCH:
+      return {
+        ...initialState,
+        coordsQueryIsLoading: false
       };
     default:
       return state;
