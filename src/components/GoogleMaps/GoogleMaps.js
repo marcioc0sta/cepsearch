@@ -10,13 +10,15 @@ const style = {
 
 const GoogleMaps = props => {
   const { lat, lng } = props.coords;
+  const { zoom } = props;
   return (
     <div>
       {!props.coordsQueryIsLoading && (
         <Map
           style={style}
           google={props.google}
-          zoom={17}
+          zoom={zoom}
+          initialCenter={{ lat, lng }}
           center={{ lat, lng }}
         >
           <Marker position={{ lat, lng }} />
@@ -26,8 +28,8 @@ const GoogleMaps = props => {
   );
 };
 
-const mapStateToProps = ({ coords, coordsQueryIsLoading }) => {
-  return { coords, coordsQueryIsLoading };
+const mapStateToProps = ({ coords, zoom, coordsQueryIsLoading }) => {
+  return { coords, coordsQueryIsLoading, zoom };
 };
 
 GoogleMaps.propTypes = {

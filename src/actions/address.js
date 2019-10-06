@@ -8,6 +8,7 @@ export const IS_ADDRESS_FROM_CEP_QUERY_LOADING =
   'IS_ADDRESS_FROM_CEP_QUERY_LOADING';
 export const GET_COORDS = 'GET_COORDS';
 export const IS_COORD_QUERY_LOADING = 'IS_COORD_QUERY_LOADING';
+export const RESET_SEARCH = 'RESET_SEARCH';
 
 const getAddressFromCep = address => {
   return {
@@ -34,6 +35,12 @@ const isCoordQueryLoading = (isLoading = false) => {
   return {
     type: IS_COORD_QUERY_LOADING,
     isLoading
+  };
+};
+
+export const resetSearch = () => {
+  return {
+    type: RESET_SEARCH
   };
 };
 
@@ -66,8 +73,3 @@ export const handleGetAddresFromCep = cep => {
       .catch(error => console.log('There is an error on cep api: ', error));
   };
 };
-
-// Promise.all([
-//   cep(60720015),
-//   geocode('av+general+osorio+de+paiva,857,+fortaleza+ce')
-// ]).then(values => values.map(value => console.log(value.data)))
