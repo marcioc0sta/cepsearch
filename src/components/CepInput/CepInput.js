@@ -22,7 +22,7 @@ const CepInput = props => {
     e.preventDefault();
 
     const { cep: storeCep } = props.address;
-    if (cep === storeCep) return;
+    if (cep === storeCep || cep.length === 0) return;
 
     const cepToApi = cep.replace('-', '');
     getAddressFromCep(cepToApi);

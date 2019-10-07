@@ -3,9 +3,20 @@ import PropTypes from 'prop-types';
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import { connect } from 'react-redux';
 
+import LoaderWrapper from './GoogleMaps.styles';
+import Loader from './Loader';
+
 const style = {
   width: '100%',
   height: '100%'
+};
+
+const LoadingContainer = () => {
+  return (
+    <LoaderWrapper>
+      <Loader color="#2c3e50" />
+    </LoaderWrapper>
+  );
 };
 
 const GoogleMaps = props => {
@@ -13,7 +24,7 @@ const GoogleMaps = props => {
   const { zoom } = props;
   return (
     <Fragment>
-      {!props.coordsQueryIsLoading && (
+      {!props.coordsQueryIsLoading ? (
         <Map
           style={style}
           google={props.google}
@@ -23,6 +34,8 @@ const GoogleMaps = props => {
         >
           <Marker position={{ lat, lng }} />
         </Map>
+      ) : (
+        <Fragment>{LoadingContainer()}</Fragment>
       )}
     </Fragment>
   );
@@ -33,7 +46,7 @@ const mapStateToProps = ({ coords, zoom, coordsQueryIsLoading }) => {
 };
 
 GoogleMaps.propTypes = {
-  zoom: PropTypes.string,
+  zoom: PropTypes.number,
   google: PropTypes.object,
   coords: PropTypes.object,
   coordsQueryIsLoading: PropTypes.bool
@@ -41,6 +54,7 @@ GoogleMaps.propTypes = {
 
 export default connect(mapStateToProps)(
   GoogleApiWrapper({
-    apiKey: process.env.REACT_APP_GOOGLE_API_KEY
+    apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
+    LoadingContainer
   })(GoogleMaps)
 );
