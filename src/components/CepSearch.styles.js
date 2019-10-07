@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const AddressAndMapWrapper = styled.div`
+export const AddressAndMapWrapper = styled.div`
   border: solid 1px #bdc3c7;
   display: flex;
   flex-wrap: wrap;
@@ -8,4 +8,9 @@ const AddressAndMapWrapper = styled.div`
   padding: 30px;
 `;
 
-export default AddressAndMapWrapper;
+export const MapsWrapper = styled.div`
+  height: 300px;
+  margin-top: 30px;
+  position: relative;
+  width: 100%;
+`;

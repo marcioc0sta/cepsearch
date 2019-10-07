@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import { connect } from 'react-redux';
 
 const style = {
-  width: '50%',
-  height: '50%'
+  width: '100%',
+  height: '100%'
 };
 
 const GoogleMaps = props => {
   const { lat, lng } = props.coords;
   const { zoom } = props;
   return (
-    <div>
+    <Fragment>
       {!props.coordsQueryIsLoading && (
         <Map
           style={style}
@@ -24,7 +24,7 @@ const GoogleMaps = props => {
           <Marker position={{ lat, lng }} />
         </Map>
       )}
-    </div>
+    </Fragment>
   );
 };
 
@@ -33,6 +33,7 @@ const mapStateToProps = ({ coords, zoom, coordsQueryIsLoading }) => {
 };
 
 GoogleMaps.propTypes = {
+  zoom: PropTypes.string,
   google: PropTypes.object,
   coords: PropTypes.object,
   coordsQueryIsLoading: PropTypes.bool

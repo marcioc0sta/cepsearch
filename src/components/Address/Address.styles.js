@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+export const AddressWrapper = styled.div`
+  width: 100%;
+`;
+
 export const StreetName = styled.h3`
   color: #2c3e50;
   font-family: Arial, Helvetica, sans-serif;

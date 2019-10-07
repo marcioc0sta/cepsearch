@@ -7,7 +7,7 @@ import GoogleMaps from './GoogleMaps/GoogleMaps';
 import Address from './Address/Address';
 import CepInput from './CepInput/CepInput';
 
-import AddressAndMapWrapper from './CepSearch.styles';
+import { AddressAndMapWrapper, MapsWrapper } from './CepSearch.styles';
 
 class CepSearch extends PureComponent {
   componentDidMount() {
@@ -20,7 +20,9 @@ class CepSearch extends PureComponent {
         <CepInput />
         <AddressAndMapWrapper>
           <Address />
-          {/* <GoogleMaps /> */}
+          <MapsWrapper>
+            <GoogleMaps />
+          </MapsWrapper>
         </AddressAndMapWrapper>
       </Fragment>
     );
