@@ -18,7 +18,7 @@ export const FormTitle = styled.h2`
 `;
 
 export const FormInput = styled.input`
-  border: solid 1px #95a5a6;
+  border: solid 1px ${props => (props.hasError ? '#e74c3c' : '#95a5a6')};
   border-radius: 4px;
   margin-left: 8px;
   padding: 8px;
@@ -48,4 +48,12 @@ export const FormButton = styled.button`
     cursor: pointer;
     transition: all 0.5s ease-out;
   }
+`;
+
+export const ErrorMessage = styled.small`
+  color: #e74c3c;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  margin-top: 10px;
+  width: 100%;
 `;

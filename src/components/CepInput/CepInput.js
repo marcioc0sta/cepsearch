@@ -11,12 +11,13 @@ import {
   FormTitle,
   FormInput,
   FormInputLabel,
-  FormButton
+  FormButton,
+  ErrorMessage
 } from './CepInput.styles';
 
 const CepInput = props => {
   const [cep, setCep] = useState('');
-  const { getAddressFromCep } = props;
+  const { getAddressFromCep, errorHasOcurred } = props;
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -41,17 +42,28 @@ const CepInput = props => {
             maskChar=""
             onChange={e => setCep(e.target.value)}
           >
-            {inputProps => <FormInput {...inputProps} type="text" />}
+            {inputProps => (
+              <FormInput
+                hasError={errorHasOcurred}
+                {...inputProps}
+                type="text"
+              />
+            )}
           </InputMask>
         </FormInputLabel>
         <FormButton type="submit">Buscar</FormButton>
       </form>
+      {errorHasOcurred && (
+        <ErrorMessage>
+          Houve um erro no servidor ou o cep digitado não é valido.
+        </ErrorMessage>
+      )}
     </CepInputWrapper>
   );
 };
 
-const mapStateToProps = ({ address }) => {
-  return { address };
+const mapStateToProps = ({ address, errorHasOcurred }) => {
+  return { address, errorHasOcurred };
 };
 
 const mapDispatchToProps = {
@@ -59,6 +71,7 @@ const mapDispatchToProps = {
 };
 
 CepInput.propTypes = {
+  errorHasOcurred: PropTypes.bool,
   address: PropTypes.object,
   getAddressFromCep: PropTypes.func
 };
