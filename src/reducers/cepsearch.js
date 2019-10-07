@@ -3,7 +3,8 @@ import {
   IS_ADDRESS_FROM_CEP_QUERY_LOADING,
   GET_COORDS,
   IS_COORD_QUERY_LOADING,
-  RESET_SEARCH
+  RESET_SEARCH,
+  ERROR_OCURRED
 } from '../actions/address';
 
 const initialState = {
@@ -20,7 +21,8 @@ const initialState = {
   },
   zoom: 4,
   addressFromCepIsLoading: true,
-  coordsQueryIsLoading: true
+  coordsQueryIsLoading: true,
+  errorHasOcurred: false
 };
 
 export default function cepsearch(state = initialState, action) {
@@ -39,7 +41,8 @@ export default function cepsearch(state = initialState, action) {
       return {
         ...state,
         ...action.coords,
-        zoom: 17
+        zoom: 17,
+        errorHasOcurred: false
       };
     case IS_COORD_QUERY_LOADING:
       return {
@@ -49,6 +52,12 @@ export default function cepsearch(state = initialState, action) {
     case RESET_SEARCH:
       return {
         ...initialState,
+        coordsQueryIsLoading: false
+      };
+    case ERROR_OCURRED:
+      return {
+        ...initialState,
+        errorHasOcurred: true,
         coordsQueryIsLoading: false
       };
     default:
