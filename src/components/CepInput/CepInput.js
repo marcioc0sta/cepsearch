@@ -2,8 +2,17 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import InputMask from 'react-input-mask';
 
 import { handleGetAddresFromCep } from '../../actions/address';
+
+import {
+  CepInputWrapper,
+  FormTitle,
+  FormInput,
+  FormInputLabel,
+  FormButton
+} from './CepInput.styles';
 
 const CepInput = props => {
   const [cep, setCep] = useState('');
@@ -20,14 +29,24 @@ const CepInput = props => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={cep}
-        onChange={e => setCep(e.target.value.replace(/^(\d{5})(\d)/, '$1-$2'))}
-      />
-      <button type="submit">Buscar</button>
-    </form>
+    <CepInputWrapper>
+      <FormTitle>Consultar</FormTitle>
+      <form onSubmit={handleSubmit}>
+        <FormInputLabel>
+          CEP:
+          <InputMask
+            type="text"
+            value={cep}
+            mask="99999-999"
+            maskChar=""
+            onChange={e => setCep(e.target.value)}
+          >
+            {inputProps => <FormInput {...inputProps} type="text" />}
+          </InputMask>
+        </FormInputLabel>
+        <FormButton type="submit">Buscar</FormButton>
+      </form>
+    </CepInputWrapper>
   );
 };
 
