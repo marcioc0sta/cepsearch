@@ -4,7 +4,8 @@ import {
   GET_COORDS,
   IS_COORD_QUERY_LOADING,
   RESET_SEARCH,
-  ERROR_OCURRED
+  ERROR_OCURRED,
+  RESET_INPUT
 } from '../actions/address';
 
 const initialState = {
@@ -20,9 +21,10 @@ const initialState = {
     lng: -47.9292
   },
   zoom: 4,
-  addressFromCepIsLoading: true,
-  coordsQueryIsLoading: true,
-  errorHasOcurred: false
+  addressFromCepIsLoading: null,
+  coordsQueryIsLoading: null,
+  errorHasOcurred: false,
+  resetInput: null
 };
 
 export default function cepsearch(state = initialState, action) {
@@ -30,7 +32,9 @@ export default function cepsearch(state = initialState, action) {
     case GET_ADDRESS_FROM_CEP:
       return {
         ...state,
-        ...action.address
+        ...action.address,
+        errorHasOcurred: false,
+        resetInput: null
       };
     case IS_ADDRESS_FROM_CEP_QUERY_LOADING:
       return {
@@ -42,7 +46,8 @@ export default function cepsearch(state = initialState, action) {
         ...state,
         ...action.coords,
         zoom: 17,
-        errorHasOcurred: false
+        errorHasOcurred: false,
+        resetInput: null
       };
     case IS_COORD_QUERY_LOADING:
       return {
@@ -61,6 +66,11 @@ export default function cepsearch(state = initialState, action) {
         errorHasOcurred: true,
         coordsQueryIsLoading: false,
         addressFromCepIsLoading: false
+      };
+    case RESET_INPUT:
+      return {
+        ...state,
+        resetInput: action.reset
       };
     default:
       return state;

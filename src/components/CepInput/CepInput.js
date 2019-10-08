@@ -1,10 +1,13 @@
 /* eslint-disable radix */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import InputMask from 'react-input-mask';
 
-import { handleGetAddresFromCep } from '../../actions/address';
+import {
+  handleGetAddresFromCep,
+  resetInputAction
+} from '../../actions/address';
 
 import {
   CepInputWrapper,
@@ -18,6 +21,13 @@ import {
 const CepInput = props => {
   const [cep, setCep] = useState('');
   const { getAddressFromCep, errorHasOcurred } = props;
+
+  useEffect(() => {
+    const { resetInput } = props;
+    if (!resetInput) return;
+
+    setCep('');
+  }, [props]);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -40,6 +50,7 @@ const CepInput = props => {
             value={cep}
             mask="99999-999"
             maskChar=""
+            onClick={() => props.resetInputAction(false)}
             onChange={e => setCep(e.target.value)}
           >
             {inputProps => (
@@ -62,15 +73,18 @@ const CepInput = props => {
   );
 };
 
-const mapStateToProps = ({ address, errorHasOcurred }) => {
-  return { address, errorHasOcurred };
+const mapStateToProps = ({ address, errorHasOcurred, resetInput }) => {
+  return { address, errorHasOcurred, resetInput };
 };
 
 const mapDispatchToProps = {
-  getAddressFromCep: handleGetAddresFromCep
+  getAddressFromCep: handleGetAddresFromCep,
+  resetInputAction
 };
 
 CepInput.propTypes = {
+  resetInputAction: PropTypes.func,
+  resetInput: PropTypes.bool,
   errorHasOcurred: PropTypes.bool,
   address: PropTypes.object,
   getAddressFromCep: PropTypes.func
