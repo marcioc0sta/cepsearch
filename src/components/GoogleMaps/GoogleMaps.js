@@ -21,10 +21,10 @@ const LoadingContainer = () => {
 
 const GoogleMaps = props => {
   const { lat, lng } = props.coords;
-  const { zoom } = props;
+  const { zoom, addressFromCepIsLoading, coordsQueryIsLoading } = props;
   return (
     <Fragment>
-      {!props.coordsQueryIsLoading ? (
+      {!coordsQueryIsLoading && !addressFromCepIsLoading ? (
         <Map
           style={style}
           google={props.google}
@@ -41,11 +41,17 @@ const GoogleMaps = props => {
   );
 };
 
-const mapStateToProps = ({ coords, zoom, coordsQueryIsLoading }) => {
-  return { coords, coordsQueryIsLoading, zoom };
+const mapStateToProps = ({
+  coords,
+  zoom,
+  coordsQueryIsLoading,
+  addressFromCepIsLoading
+}) => {
+  return { coords, coordsQueryIsLoading, zoom, addressFromCepIsLoading };
 };
 
 GoogleMaps.propTypes = {
+  addressFromCepIsLoading: PropTypes.bool,
   zoom: PropTypes.number,
   google: PropTypes.object,
   coords: PropTypes.object,

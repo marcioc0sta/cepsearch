@@ -52,13 +52,15 @@ export default function cepsearch(state = initialState, action) {
     case RESET_SEARCH:
       return {
         ...initialState,
-        coordsQueryIsLoading: false
+        coordsQueryIsLoading: false,
+        addressFromCepIsLoading: false
       };
     case ERROR_OCURRED:
       return {
         ...initialState,
         errorHasOcurred: true,
-        coordsQueryIsLoading: false
+        coordsQueryIsLoading: false,
+        addressFromCepIsLoading: false
       };
     default:
       return state;
