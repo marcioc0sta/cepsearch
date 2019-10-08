@@ -10,6 +10,7 @@ export const GET_COORDS = 'GET_COORDS';
 export const IS_COORD_QUERY_LOADING = 'IS_COORD_QUERY_LOADING';
 export const RESET_SEARCH = 'RESET_SEARCH';
 export const ERROR_OCURRED = 'ERROR_OCURRED';
+export const RESET_INPUT = 'RESET_INPUT';
 
 const getAddressFromCep = address => {
   return {
@@ -48,6 +49,13 @@ const errorOcurrend = () => {
 export const resetSearch = () => {
   return {
     type: RESET_SEARCH
+  };
+};
+
+export const resetInputAction = reset => {
+  return {
+    type: RESET_INPUT,
+    reset
   };
 };
 
